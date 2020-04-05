@@ -6,6 +6,8 @@ let linksToVisit = [
   "/Glorious-Aura-Keycaps-Mechanical-Keyboards/dp/B07D6WMVMW/ref=pd_rhf_dp_p_img_9?_encoding=UTF8&psc=1&refRID=WXBNFAHDSEDD455X21PC",
 ];
 
+//https://www.amazon.com/dp/B07GGTF6XZ
+
 async function main() {
   while (linksToVisit.length > 0) {
     try {
@@ -19,7 +21,11 @@ async function main() {
 
       const parsedResult = parser(html);
 
-      linksToVisit = [...linksToVisit, ...parsedResult.productLinks];
+      const cleanLinks = parsedResult.productLinks.map((link) =>
+        link.slice(0, 14)
+      );
+
+      linksToVisit = [...linksToVisit, ...cleanLinks];
       console.log(parsedResult);
       visitedLinks.push(currentUrl);
       await sleep(5000);
