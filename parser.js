@@ -5,7 +5,11 @@ function parseAll(html) {
 
   const title = $("#productTitle").text().trim();
 
-  const price = $("#priceblock_saleprice").text().trim();
+  let price = $("#priceblock_saleprice").text().trim();
+
+  if (price === "") {
+    price = $("#priceblock_ourprice").text().trim();
+  }
 
   const productLinks = $("a")
     .map((index, element) => $(element).attr("href"))
